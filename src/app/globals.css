@@ -1,0 +1,201 @@
+@import "tailwindcss";
+
+:root {
+    /* 🎨 Colors */
+    --primary-main: #49B73E;
+    --primary-light: #DBF1D8;
+    --secondary-main: #F1F1F1;
+    --red: #FF4040;
+
+    --background: #FFFFFF;
+    --foreground: #0A0A0A;
+
+     --text-main: #050505;
+    --text-secondary: #5E5E5E;
+
+    /* 🔤 Fonts */
+--font-primary: var(--font-satoshi);
+--font-secondary: var(--font-six-caps);
+
+
+    /* 📏 Spacing */
+    --S6: 6px;
+    --S8: 8px;
+    --S16: 16px;
+    --S24: 24px;
+    --S32: 32px;
+    --S40: 40px;
+    --S48: 48px;
+    --S56: 56px;
+    --S64: 64px;
+
+    --S80: 80px;
+    --S104: 104px;
+    --S160: 160px;
+
+    /* 🧭 Radii */
+    --R8: 8px;
+    --R16: 16px;
+    --R24: 24px;
+    --R32: 32px;
+    --R40: 40px;
+}
+
+@theme inline {
+
+    --color-primary-main: var(--primary-main);
+    --color-primary-light: var(--primary-light);
+    --color-secondary-main: var(--secondary-main);
+    --color-worst: var(--red);
+
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+
+--color-main: var(--text-main);
+   --color-secondary: var(--text-secondary);
+
+    --font-primary: var(--font-primary);
+    --font-secondary: var(--font-secondary);
+
+    /* Spacing */
+    --spacing-s6: var(--S6);
+    --spacing-s8: var(--S8);
+    --spacing-s16: var(--S16);
+    --spacing-s24: var(--S24);
+    --spacing-s32: var(--S32);
+    --spacing-s40: var(--S40);
+    --spacing-s48: var(--S48);
+    --spacing-s56: var(--S56);
+    --spacing-s64: var(--S64);
+
+    --spacing-s80: var(--S80);
+    --spacing-s104: var(--S104);
+    --spacing-s160: var(--S160);
+
+    /* Radii */
+    --radius-r8: var(--R8);
+    --radius-r16: var(--R16);
+    --radius-r24: var(--R24);
+    --radius-r32: var(--R32);
+    --radius-r40: var(--R40);
+}
+
+/* 🧠 Typography */
+
+.heading-h1 {
+    @apply font-bold;
+    font-family: var(--font-secondary);
+    font-size: clamp(3rem, 5vw + 1rem, 4rem);
+    /* 48px → 64px */
+}
+
+.heading-h2 {
+    @apply font-bold;
+    font-family: var(--font-primary);
+    font-size: clamp(2.5rem, 4vw + 1rem, 3.5rem);
+    /* 40px → 56px */
+}
+
+.heading-h3 {
+    @apply font-bold;
+    font-family: var(--font-primary);
+    font-size: clamp(1.75rem, 2vw + 1rem, 2rem);
+    /* 28px → 32px */
+}
+
+.heading-h4 {
+    font-family: var(--font-primary);
+    @apply font-medium;
+    font-size: clamp(1.35rem, 1vw + 1rem, 1.7rem);
+    /* 20px → 24px */
+}
+.heading-h5 {
+    
+    @apply font-medium;
+    font-family: var(--font-primary);
+    font-size: clamp(1.125rem, 1vw + 1rem, 1.563rem);
+    /* 18px → 25px */
+    line-height: clamp(1.15, 0.6vw + 1, 1.3);
+}
+
+.heading-h6 {
+    @apply font-medium;
+    font-size: clamp(1rem, 0.4vw + 0.9rem, 1.25rem);
+    /* 16px → 20px */
+    line-height: clamp(1.25, 0.4vw + 1, 1.4);
+}
+.body-large {
+    @apply font-normal;
+    font-family: var(--font-primary);
+    font-size: clamp(1rem, 0.12vw + 1rem, 1.125rem);
+    /* 16px → 18px */
+}
+
+.body-default {
+    @apply font-normal;
+    font-size: clamp(0.875rem, 0vw + 1rem, 1rem);
+    /* 16px → 20px */
+    
+}
+
+
+.caption {
+    @apply font-normal;
+    font-size: clamp(0.75rem, 1vw + 1rem, 0.75rem);
+    /* 16px → 20px */
+}
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-primary);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+
+}
+html {
+  scroll-behavior: smooth;
+}
+
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.35s cubic-bezier(0.22, 1, 0.36, 1)  forwards;
+}
+
