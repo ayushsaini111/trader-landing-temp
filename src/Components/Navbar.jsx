@@ -11,43 +11,44 @@ import { useRouter } from "next/navigation";
 
 export default function Navbar() {
     const router = useRouter();
-const pathname = usePathname();
-const [isWhiteNav, setIsWhiteNav] = useState(false);
+    const pathname = usePathname();
+    const [isWhiteNav, setIsWhiteNav] = useState(false);
+    const [activePath, setActivePath] = useState(pathname);
 
-useEffect(() => {
-  const handleScroll = () => {
-    const whiteSections = document.querySelectorAll("[data-nav='white']");
-    let shouldBeWhite = false;
+    useEffect(() => {
+        const handleScroll = () => {
+            const whiteSections = document.querySelectorAll("[data-nav='white']");
+            let shouldBeWhite = false;
 
-    whiteSections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
+            whiteSections.forEach((section) => {
+                const rect = section.getBoundingClientRect();
 
-      // when section top crosses navbar area
-      if (rect.top <= 80 && rect.bottom > 80) {
-        shouldBeWhite = true;
-      }
-    });
+                // when section top crosses navbar area
+                if (rect.top <= 80 && rect.bottom > 80) {
+                    shouldBeWhite = true;
+                }
+            });
 
-    setIsWhiteNav(shouldBeWhite);
-  };
+            setIsWhiteNav(shouldBeWhite);
+        };
 
-  handleScroll();
-  window.addEventListener("scroll", handleScroll);
+        handleScroll();
+        window.addEventListener("scroll", handleScroll);
 
-  return () => window.removeEventListener("scroll", handleScroll);
-}, []);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
-const scrollToConnect = () => {
-  if (pathname !== "/") {
-    // go to home page with hash
-    router.push("/#letsConnect");
-  } else {
-    // already on home page
-    document.getElementById("letsConnect")?.scrollIntoView({
-      behavior: "smooth",
-    });
-  }
-};
+    const scrollToConnect = () => {
+        if (pathname !== "/") {
+            // go to home page with hash
+            router.push("/#letsConnect");
+        } else {
+            // already on home page
+            document.getElementById("letsConnect")?.scrollIntoView({
+                behavior: "smooth",
+            });
+        }
+    };
 
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -59,7 +60,7 @@ const scrollToConnect = () => {
         return () => (document.body.style.overflow = "");
     }, [isMenuOpen]);
 
- 
+
     const toggleMenu = () => setIsMenuOpen((prev) => !prev);
     const closeMenu = () => setIsMenuOpen(false);
 
@@ -78,13 +79,13 @@ const scrollToConnect = () => {
 
             {/* LOGO */}
             <Link
-  href="/"
-  className="shrink-0"
-  onClick={() => window.reload()}
->
+                href="/"
+                className="shrink-0"
+                onClick={() => window.reload()}
+            >
 
                 <Image
-                     src={isWhiteNav ? "/Images/footer.png" : "/logo.png"}
+                    src={isWhiteNav ? "/Images/footer.png" : "/logo.png"}
                     alt="Logo"
                     height={40}
                     width={40}
@@ -95,7 +96,7 @@ const scrollToConnect = () => {
             {/* DESKTOP MENU */}
             <ul className="hidden w-full sm:flex gap-s32 items-center justify-center flex-1">
                 {navLinks.map((item) => {
-                    const isActive = pathname === item.href;
+                    const isActive = activePath  === item.href;
 
                     return (
                         <li
@@ -103,16 +104,23 @@ const scrollToConnect = () => {
                             className="relative"
                         >
                             <Link
-                            onClick={() => window.reload()}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setActivePath(item.href);
+
+                                    setTimeout(() => {
+                                        window.location.href = item.href;
+                                    }, 500);
+                                }}
+
                                 href={item.href}
                                 className={`relative p-s6 transition-colors duration-300
-                                                     ${
-                                             isActive
-                                                ? "text-primary-main"
-                                                : isWhiteNav
-                                               ? "text-primary-light hover:text-primary-main"
-                                                : "text-black hover:text-primary-main"
-                                            }
+                                                     ${isActive
+                                        ? "text-primary-main"
+                                        : isWhiteNav
+                                            ? "text-primary-light hover:text-primary-main"
+                                            : "text-black hover:text-primary-main"
+                                    }
 
                                             `}
 
@@ -133,7 +141,7 @@ const scrollToConnect = () => {
             {/* RIGHT SIDE BUTTON */}
             <div className="flex items-center gap-s16">
                 <div className="hidden sm:block">
-                    <Button  onClick={scrollToConnect} children={"Connect with me"}  />
+                    <Button onClick={scrollToConnect} children={"Connect with me"} />
                 </div>
 
                 {/* MOBILE TOGGLE ICON */}
@@ -146,7 +154,7 @@ const scrollToConnect = () => {
             {isMenuOpen && (
                 <div
                     className="fixed inset-0 not-last-of-type: md:hidden z-40 "
-onClick={closeMenu}
+                    onClick={closeMenu}
                 />
             )}
 
@@ -203,11 +211,11 @@ onClick={closeMenu}
                     {/* CONTACT BUTTON */}
                     <div onClick={closeMenu} className="mx-s16 my-s8">
                         <Button
-                           
+
                             variant="secondary"
-                            
+
                             onClick={scrollToConnect}
-                           
+
                             className="
                                                  block"
                         >
