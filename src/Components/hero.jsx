@@ -29,7 +29,7 @@ function hero() {
 
                 {/* ✅ GRADIENT OVERLAY (ABOVE IMAGE) */}
                 <div className="
-    absolute inset-0 -bottom-2
+    absolute inset-0 -bottom-2 
     bg-[linear-gradient(to_bottom,rgba(255,255,255,0)_0%,rgba(255,255,255,0)_50%,rgba(255,255,255,1)_96%)]
     z-30
     pointer-events-none
